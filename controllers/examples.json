@@ -1,0 +1,26 @@
+{
+  "cars": [
+    {
+    "id": "adhkj123adsh3s1gsfud22",
+    "model": "X5",
+    "color": "Blue",
+    "price": 20300,
+    "new": false
+  },
+  {
+    "id": "ada32j2312lk3j12ndas5d",
+    "model": "207",
+    "color": "White",
+    "price": 20300,
+    "new": false
+  }
+],
+  "brands": [{
+    "name": "BMW",
+    "cars": ["adhkj123adsh3s1gsfud22"]
+  },
+  {
+    "name": "Mercedez Benz",
+    "cars": ["ada32j2312lk3j12ndas5d"]  
+  }]
+}
