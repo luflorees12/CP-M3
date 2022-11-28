@@ -17,6 +17,18 @@ const utils = require('../utils');
 */
 
 const getCarsByBrand = (brand, sort) => {
+  const marca = utils.brands.find((m) => m.name === brand);
+  if(!marca) throw Error ("Marca no encontrada");
+  const encontrados = utils.cars.filter((c) => marca.cars.includes(c.id));
+  console.log(encontrados);
+  if(encontrados.length === 0) return "No se encontraron coches";
+
+  
+  if (sort === "highPrice") return encontrados.sort ((a,b) => b.price - a.price);
+
+  if (sort === "lowPrice") return encontrados.sort((a,b) => a.price - b.price);
+
+  return encontrados;
 };
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️

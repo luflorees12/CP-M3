@@ -24,7 +24,12 @@ const utils = require('../utils');
           ]
     */
 
-const deleteCar = (carId) => {};
+const deleteCar = (carId) => {
+  const findCar= utils.cars.find((el)=> el.id === carId);
+  if (!findCar) throw Error (`No existe el coche con id: ${carId}`);
+  utils.cars= utils.cars.filter ((cars) => cars.id !== carId);
+  return utils.cars;
+};
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = deleteCar;

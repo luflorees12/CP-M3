@@ -14,7 +14,15 @@ const listCars = require('../controllers/02-controller');
   2) ¡Revisa en los test el status que deben tener tus respuestas!
 */
 
-// router.get('/cars', (req, res) => {});
+router.get('/cars', (req, res) => {
+  const { color } = req.body;
+
+  try{
+    res.status(200).json(listCars(color));
+  } catch (err){
+    res.status(400).json({ err: err.message });
+  }
+});
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = router;

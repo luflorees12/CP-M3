@@ -15,7 +15,22 @@ const utils = require('../utils');
    2) Debes obtener los coches a partir de los IDs almacenados en su marca.
 */
 
-const getBrandPrices = (brand, unused) => {};
+const getBrandPrices = (brand, unused) => {
+  let brandIsTrue = utils.brands.find((marca) => marca.name === brand);
+  let carIsTrue = utils.cars.filter((auto) => brandIsTrue.cars.includes(auto.id));
+
+  if (!brandIsTrue) throw Error("Marca no encontrada");
+
+  if (unused === true) {
+    return carIsTrue.filter((e) => e.new === true).reduce((acc, c) => acc + c.price, 0);
+  }
+
+  if (unused === false) {
+    return carIsTrue.filter((e) => e.new === false).reduce((acc, c) => acc + c.price, 0);
+  }
+
+  return carIsTrue.reduce((acc, c) => acc + c.price, 0);
+};
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = getBrandPrices;

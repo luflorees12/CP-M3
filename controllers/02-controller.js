@@ -14,6 +14,12 @@ const utils = require('../utils');
 */
 
 const listCars = (color) => {
+  const colorCar = utils.cars.filter((auto) => auto.color === color);
+  
+  
+  if (!colorCar.length) throw Error ("No hay coches con ese color en la base de datos");
+
+  return colorCar;
 };
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️

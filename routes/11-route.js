@@ -23,7 +23,32 @@ const getCarsByBrand = require('../controllers/05-controller');
   6) Recuerda que los parametros de URL son recibidos como string.
 */
 
-// router.get('/cars/:brandName', (req, res) => {});
+router.get('/cars/:brandName', (req, res) => {
+  let { brandName } = req.params;
+  let { sort } =req.query;
+
+  try{
+    if(!isNaN(brandName)){
+      res.status(400).json({ error: "El parámetro brandName es inválido" });
+    }
+    if (sort !== "highPrice" &&  sort !== "lowPrice" && sort !== undefined){ 
+      res.status(400).json({ error: "El parámetro sort es inválido"});
+    }
+    let getCars = getCarsByBrand (brandName, sort);
+      if (typeof getCars === "string"){
+        res.status(400).json({ error: "No se encontraron coches" });
+      } else {
+        res.status(200).json({ brand: brandName, results: getCars })
+      }
+  } catch (error){
+    res.status(404).json({ error: "Marca no encontrada" });
+  }
+
+
+
+
+
+});
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = router;

@@ -14,7 +14,17 @@ const deleteCar = require('../controllers/04-controller');
   2) ¡Revisa en los test el status que deben tener tus respuestas!
 */
 
-// router.delete('/cars', (req, res) => {});
+ router.delete('/cars', (req, res) => {
+  const {id} = req.body;
+
+  try {
+    deleteCar (id);
+    return res.status(200).json({message: `El coche con el id ${id} fue eliminado de forma exitosa`})
+  }catch (error){
+    return res.status(400).json({error: `No existe el coche con id: ${id}`})
+  }
+
+ });
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = router;

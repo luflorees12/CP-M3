@@ -16,7 +16,33 @@ const getBrandPrices = require('../controllers/06-controller');
   3) ¡Revisa en los test el status que deben tener tus respuestas!
 */
 
-// router.get('/brands/:brandName/car-prices', (req, res) => {});
+router.get('/brands/:brandName/car-prices', (req, res) => {
+  const { brandName } = req.params;
+  const { unused } = req.query;
+
+  let Boolean = (a) => {
+    if (a === "true") return true;
+    if (a === "false") return false;
+  };
+  
+  const result = Boolean(unused);
+
+  if (unused && result === undefined){
+    return res.status(400).json({
+      error: "El parámetro unused es inválido" 
+    });
+  }
+
+  try {
+    return res.status(200).json({ results: getBrandPrices(brandName, result) });
+  }catch (error){
+    return res.status(404).json({ error: "Marca no encontrada" })
+  }
+
+
+
+
+});
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = router;

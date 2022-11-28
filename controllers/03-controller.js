@@ -15,6 +15,31 @@ const utils = require('../utils');
   */
 
 const updateCar = (car) => {
+  typeof car === "object" &&
+    (car ={
+      id: undefined,
+      model: undefined,
+      color: undefined,
+      price: undefined,
+      new: undefined,
+      ...car,
+    });
+  
+  let buscador = utils.cars.findIndex((el) => el.id === car.id);
+  if(Object.values(car).some((value) => value === undefined)) { 
+    throw new Error("Faltan datos a completar")
+  }  
+    if (!utils.cars.some((e) => e.id === car.id)){
+      throw new Error("No se encontro el coche solicitado");
+    } else{
+      utils.cars[buscador] ={
+        ...car,
+      };
+        return utils.cars[buscador].id;
+    }
+
+
+
 };
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️

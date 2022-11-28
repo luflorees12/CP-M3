@@ -14,7 +14,16 @@ const addCars = require('../controllers/01-controller');
   2) ¡Revisa en los test el status que deben tener tus respuestas!
 */
 
-// router.post('/cars', (req, res) => {});
+
+
+router.post('/cars', (req, res) => {
+  const { cars, brand } =req.body;
+  try {
+    res.status(201).json ({msg: addCars(cars,brand) });
+  } catch (err){
+    res.status(400).json({err: err.message}); 
+  }
+});
 
 //⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = router;

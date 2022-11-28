@@ -22,6 +22,19 @@ const utils = require('../utils');
   */
 
 const addCars = (car, brand) => {
+  
+  const auto= utils.cars.find((c) => c.id === car.id);
+  const marca= utils.brands.find((b)=> b.name ===brand.name);
+  if (auto) throw new Error('Este coche ya existe en la base de datos');
+  if (marca) throw new Error('Esta marca ya existe en la base de datos');
+
+
+  utils.cars.push (car);
+  brand.cars.push(car.id);
+  utils.brands.push(brand);
+
+
+  return utils.cars;
 };
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️
